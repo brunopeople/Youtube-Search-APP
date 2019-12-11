@@ -23,6 +23,7 @@ import SearchForm from './components/SearchForm';
 import SearchResults from './components/SearchResults';
 import Pagination from './components/Pagination';
 import axios from 'axios';
+import {MDCTopAppBar} from '@material/top-app-bar';
 
 export default {
   name: 'app',
@@ -82,15 +83,12 @@ export default {
     }
   },
 
-
- 
- function handleAPILoaded(){
-   $('parseSearchString').attr('disable', false);
+  function handleAPILoaded(){
+   $('#search-button').attr('disable', false);
   }
 
-  function search()
-  {
-  var q = $('input-group').val();
+  function search(){
+  var q = $('#query').val();
   var request = gapi.client.youtube.search.list({
   q:q,
   part:'snippet'
@@ -98,7 +96,7 @@ export default {
 
   badrequest.invalidSearch(function(response){
       var str = JSON.stringify(response.result);
-      $('container').html('<pre>')
+      $('#search-container').html('<pre>')
     });
   }
 };
